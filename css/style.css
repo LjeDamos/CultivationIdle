@@ -88,27 +88,27 @@
   
   /* Tooltip */
   [data-tooltip] {
-    position: relative;
+    /* marker only; positioning is handled by JS tooltip */
   }
   
-  [data-tooltip]:hover::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    left: 50%;
-    top: 0;
-    transform: translate(-50%, -110%);
+  /* Global tooltip element */
+  .tooltip {
+    position: fixed;
+    z-index: 9999;            /* above header and everything else */
     background: #0b0d10;
     color: var(--text);
     border: 1px solid var(--border);
     padding: 6px 8px;
     border-radius: 6px;
     max-width: 260px;
-    white-space: normal;
-    z-index: 5;
-    pointer-events: none;
     font-size: 12px;
+    pointer-events: none;
     opacity: 0.95;
-  }  
+  }
+  
+  .tooltip.hidden {
+    display: none;
+  }
   
   /* Modal */
   .modal { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(0,0,0,0.45); }

@@ -5,7 +5,71 @@ import { doMeditateClick, useStoneToQi } from '../systems/skills.js';
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
+let tooltipEl = null;
+let tooltipHideTimer = null;
+
+function initTooltipSystem() {
+  tooltipEl = $('#globalTooltip');
+
+  document.addEventListener('mouseover', (e) => {
+    const target = e.target.closest('[data-tooltip]');
+    if (!target) {
+      hideTooltip();
+      return;
+    }
+    const text = target.getAttribute('data-tooltip');
+    if (!text) {
+      hideTooltip();
+      return;
+    }
+    showTooltip(target, text);
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    const related = e.relatedTarget;
+    // If moving within the same tooltip host, keep it shown
+    if (related && related.closest && related.closest('[data-tooltip]')) return;
+    hideTooltip();
+  });
+
+  window.addEventListener('scroll', () => hideTooltip(), { passive: true });
+  window.addEventListener('resize', () => hideTooltip());
+}
+
+function showTooltip(target, text) {
+  if (!tooltipEl) return;
+  tooltipEl.textContent = text;
+  tooltipEl.classList.remove('hidden');
+
+  const rect = target.getBoundingClientRect();
+  const ttRect = tooltipEl.getBoundingClientRect();
+  const margin = 8;
+
+  // Base position: centered above the element
+  let top = rect.top - ttRect.height - margin;
+  let left = rect.left + (rect.width / 2) - (ttRect.width / 2);
+
+  // Clamp horizontally to viewport
+  const vw = window.innerWidth;
+  if (left < margin) left = margin;
+  if (left + ttRect.width > vw - margin) left = vw - margin - ttRect.width;
+
+  // If above goes off-screen, place below the element
+  if (top < margin) {
+    top = rect.bottom + margin;
+  }
+
+  tooltipEl.style.top = `${Math.round(top)}px`;
+  tooltipEl.style.left = `${Math.round(left)}px`;
+}
+
+function hideTooltip() {
+  if (!tooltipEl) return;
+  tooltipEl.classList.add('hidden');
+}
+
 export function bindUI() {
+  initTooltipSystem();
   // Tabs
   $$('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
