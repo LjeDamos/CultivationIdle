@@ -52,6 +52,10 @@ export function applyOfflineProgress() {
   const now = Date.now();
   const start = State.run.lifeStartMs || now;
   const elapsedSec = Math.min((now - start) / 1000, 60 * 60 * 4); // cap 4h
+
+  // Advance age based on the same rate as the active loop (1 year per 10 minutes)
+  State.character.ageYears += elapsedSec / (60 * 10);
+
   // Simple offline meditation equivalent (extend later with managers)
   const ticks = Math.floor(elapsedSec * 2); // ~2 actions per sec
   const qiGain = ticks * 0.1;

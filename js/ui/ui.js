@@ -262,11 +262,11 @@ export function updateOverview() {
   $('#stonesValue').textContent = State.resources.stones.toFixed(0);
   $('#charLevel').textContent = State.character.level.toString();
 
-  // Convert years to whole days for clearer display
-  const ageYears = State.character.ageYears;
-  const ageDays = Math.floor(ageYears * 365);
-  $('#ageValue').textContent = ageDays.toString();
+  // Convert years to whole days, then derive years and days % 365
+  const totalDays = Math.floor(State.character.ageYears * 365);
+  const years = Math.floor(totalDays / 365);
+  const daysRemainder = totalDays % 365;
+  $('#ageValue').textContent = `${years}y ${daysRemainder}d`;
 
   $('#raceValue').textContent = State.character.race;
 }
-

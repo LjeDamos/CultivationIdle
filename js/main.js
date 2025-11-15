@@ -24,6 +24,9 @@ window.addEventListener('manual-import', (e) => {
   updateOverview();
   renderLog();
 });
+window.addEventListener('ui-update', () => {
+  updateOverview();
+});
 
 runLoop();
 
