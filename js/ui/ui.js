@@ -81,6 +81,24 @@ export function bindUI() {
     });
   });
 
+  if (State.time.perceptionScale === undefined) {
+    State.time.perceptionScale = 1.0;
+  }
+  
+  const timeSlider = $('#timePerceptionSlider');
+  const timeDisplay = $('#timePerceptionDisplay');
+  
+  if (timeSlider && timeDisplay) {
+    timeSlider.value = State.time.perceptionScale;
+    timeDisplay.textContent = `${State.time.perceptionScale.toFixed(1)}x`;
+    
+    timeSlider.addEventListener('input', (e) => {
+      const value = parseFloat(e.target.value);
+      State.time.perceptionScale = value;
+      timeDisplay.textContent = `${value.toFixed(1)}x`;
+    });
+  }
+
   // Overview actions
   $('#meditateBtn').addEventListener('click', () => {
     doMeditateClick();
@@ -257,16 +275,34 @@ export function renderLog() {
   });
 }
 
+function capitalizeRaceName(raceId) {
+  // Find the race in RACES array and return capitalized name
+  const race = RACES.find(r => r.id === raceId);
+  if (race) {
+    return race.name.charAt(0).toUpperCase() + race.name.slice(1);
+  }
+  // Fallback: capitalize first letter of ID
+  return raceId.charAt(0).toUpperCase() + raceId.slice(1);
+}
+
 export function updateOverview() {
   $('#qiValue').textContent = State.resources.qi.toFixed(1);
   $('#stonesValue').textContent = State.resources.stones.toFixed(0);
-  $('#charLevel').textContent = State.character.level.toString();
-
-  // Convert years to whole days, then derive years and days % 365
+  
+  // Update header instead of overview panel
   const totalDays = Math.floor(State.character.ageYears * 365);
   const years = Math.floor(totalDays / 365);
   const daysRemainder = totalDays % 365;
-  $('#ageValue').textContent = `${years}y ${daysRemainder}d`;
-
-  $('#raceValue').textContent = State.character.race;
+  
+  $('#headerLevel').textContent = `Lv ${State.character.level}`;
+  $('#headerAge').textContent = `${years}y ${daysRemainder}d`;
+  $('#headerRace').textContent = capitalizeRaceName(State.character.race);
+  
+  // Keep these for backward compatibility if elements still exist
+  const charLevel = $('#charLevel');
+  const ageValue = $('#ageValue');
+  const raceValue = $('#raceValue');
+  if (charLevel) charLevel.textContent = State.character.level.toString();
+  if (ageValue) ageValue.textContent = `${years}y ${daysRemainder}d`;
+  if (raceValue) raceValue.textContent = capitalizeRaceName(State.character.race);
 }

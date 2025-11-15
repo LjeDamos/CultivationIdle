@@ -5,20 +5,23 @@ import { updateSkills, recalcCharacterLevel } from '../systems/skills.js';
 let autosaveTimer = 0;
 
 export function gameTick(dt) {
+  // Apply time perception scale
+  const scaledDt = dt * State.time.perceptionScale;
+  
   // Age increases slowly; 1 year per 10 minutes of active time (example)
-  State.character.ageYears += dt / (60 * 10);
+  State.character.ageYears += scaledDt / (60 * 10);
   // Core systems
-  updateSkills(dt);
+  updateSkills(scaledDt);
   recalcCharacterLevel();
 
-  // Unlock pacing
+  // Unlock pacing (rest remains the same)
   const lvl = State.character.level;
   if (lvl >= 2) State.ui.unlocks.skills = true;
   if (lvl >= 3) State.ui.unlocks.log = true;
   if (lvl >= 5) State.ui.unlocks.traits = true;
   if (lvl >= 6) State.ui.unlocks.races = true;
 
-  // Autosave
+  // Autosave (use unscaled dt for autosave timing)
   autosaveTimer += dt;
   if (autosaveTimer >= State.autosaveSec) {
     autosaveTimer = 0;

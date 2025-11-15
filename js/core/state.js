@@ -2,7 +2,7 @@ import { CONSTANTS, SKILLS } from '../data/config.js';
 
 export const State = {
   version: 1,
-  time: { lastTs: performance.now(), accumulated: 0 },
+  time: { lastTs: performance.now(), accumulated: 0, perceptionScale: 1.0 },
   autosaveSec: CONSTANTS.AUTOSAVE_SEC_DEFAULT,
   resources: {
     qi: 0,

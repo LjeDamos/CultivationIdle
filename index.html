@@ -9,6 +9,11 @@
 <body>
   <header class="app-header">
     <div class="title">Cultivation Idle</div>
+    <div class="header-info">
+      <span id="headerLevel">Lv 1</span>
+      <span id="headerAge">16y 0d</span>
+      <span id="headerRace">Human</span>
+    </div>
     <div class="header-actions">
       <button id="saveBtn" class="btn" data-tooltip="Save your current progress.">Save</button>
       <button id="exportBtn" class="btn" data-tooltip="Export your save to a text string.">Export</button>
@@ -107,6 +112,16 @@
       <section class="panel hidden" id="panel-settings">
         <h2>Settings</h2>
         <div class="list">
+          <div class="card">
+            <div class="card-title">Time Perception (Debug)</div>
+            <div class="row">
+              <span>Scale</span>
+              <span id="timePerceptionDisplay">1.0x</span>
+            </div>
+            <div class="row">
+              <input id="timePerceptionSlider" type="range" min="0.1" max="100" step="0.1" value="1.0" style="width: 100%;">
+            </div>
+          </div>
           <label class="row">
             <span>Autosave every (sec)</span>
             <input id="autosaveSec" type="number" min="5" max="120" step="5" value="15">
@@ -116,7 +131,7 @@
             Hard Reset
           </button>
         </div>
-      </section>
+      </section>      
     </main>
   </div>
 
