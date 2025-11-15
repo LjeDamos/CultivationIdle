@@ -19,10 +19,14 @@ export function switchTab(id) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
 
-  const viewId = `tab-${id}`;
-  const view = document.getElementById(viewId);
+  // id already contains 'tab-' prefix from data-tab attribute
+  const view = document.getElementById(id);
   const tab = document.querySelector(`.tab[data-tab="${id}"]`);
 
   if (view) view.classList.add('active');
   if (tab) tab.classList.add('active');
+}
+
+export function buildUI(G) {
+  ui.buildUI(G);
 }
