@@ -85,22 +85,41 @@ function closeRaceModal() { $('#raceModal').classList.add('hidden'); }
 function renderRaceChoices() {
   const host = $('#raceChoices');
   host.innerHTML = '';
+
+  // Start with current race as selected (or human by default)
+  let selectedId = State.character.race || 'human';
+
   for (const r of RACES) {
     const div = document.createElement('div');
-    div.className = 'card';
+    div.className = 'card race-card';
+    if (r.id === selectedId) {
+      div.classList.add('selected');
+    }
+
     div.innerHTML = `
-      <label class="row">
-        <input type="radio" name="racePick" value="${r.id}" ${r.id === State.character.race ? 'checked' : ''}/>
+      <div class="row">
         <span>${r.name}</span>
-      </label>
-      <div class="row"><span>${r.desc}</span><span></span></div>
+      </div>
+      <div class="row">
+        <span>${r.desc}</span>
+        <span></span>
+      </div>
     `;
+
+    div.addEventListener('click', () => {
+      selectedId = r.id;
+      host.querySelectorAll('.race-card').forEach(c => c.classList.remove('selected'));
+      div.classList.add('selected');
+    });
+
     host.appendChild(div);
   }
+
   $('#raceConfirmBtn').onclick = () => {
-    const sel = host.querySelector('input[name=racePick]:checked')?.value || 'human';
+    const sel = selectedId || 'human';
     setRace(sel);
     State.run.raceChosenOnce = true;
+    updateOverview(); // update race label immediately
     closeRaceModal();
   };
 }
@@ -178,6 +197,12 @@ export function updateOverview() {
   $('#qiValue').textContent = State.resources.qi.toFixed(1);
   $('#stonesValue').textContent = State.resources.stones.toFixed(0);
   $('#charLevel').textContent = State.character.level.toString();
-  $('#ageValue').textContent = State.character.ageYears.toFixed(2);
+
+  // Convert years to whole days for clearer display
+  const ageYears = State.character.ageYears;
+  const ageDays = Math.floor(ageYears * 365);
+  $('#ageValue').textContent = ageDays.toString();
+
   $('#raceValue').textContent = State.character.race;
 }
+

@@ -45,6 +45,17 @@
   .panels { padding: 16px; overflow: auto; }
   .panel.hidden { display: none; }
   
+/* Race cards */
+.race-card {
+  cursor: pointer;
+}
+
+.race-card.selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+
   h2 { margin: 8px 0 12px; font-size: 18px; font-weight: 600; }
   .grid {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -79,14 +90,25 @@
   [data-tooltip] {
     position: relative;
   }
+  
   [data-tooltip]:hover::after {
     content: attr(data-tooltip);
     position: absolute;
-    left: 100%; top: 50%; transform: translate(8px, -50%);
-    background: #0b0d10; color: var(--text); border: 1px solid var(--border);
-    padding: 6px 8px; border-radius: 6px; white-space: nowrap; z-index: 5;
-    pointer-events: none; font-size: 12px; opacity: 0.95;
-  }
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, -110%);
+    background: #0b0d10;
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 6px 8px;
+    border-radius: 6px;
+    max-width: 260px;
+    white-space: normal;
+    z-index: 5;
+    pointer-events: none;
+    font-size: 12px;
+    opacity: 0.95;
+  }  
   
   /* Modal */
   .modal { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(0,0,0,0.45); }
