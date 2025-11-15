@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Cultivation Idle</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="./css/style.css" rel="stylesheet" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="title">Cultivation Idle</div>
+    <div class="header-actions">
+      <button id="saveBtn" class="btn" data-tooltip="Save your current progress.">Save</button>
+      <button id="exportBtn" class="btn" data-tooltip="Export your save to a text string.">Export</button>
+      <button id="importBtn" class="btn" data-tooltip="Import a previously exported save string.">Import</button>
+    </div>
+  </header>
+
+  <div class="app">
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="overview" id="tab-overview" data-tooltip="Overview of resources and core actions.">Overview</button>
+      <button class="tab-btn" data-tab="skills" id="tab-skills" data-locked="true"
+              data-tooltip="Train skills to gain power. Unlocks at Level 2.">Skills</button>
+      <button class="tab-btn" data-tab="traits" id="tab-traits" data-locked="true"
+              data-tooltip="Pick 3 traits per life. Unlocks at Level 5.">Traits</button>
+      <button class="tab-btn" data-tab="races" id="tab-races" data-locked="true"
+              data-tooltip="Choose your race at start; more options unlock later.">Races</button>
+      <button class="tab-btn" data-tab="log" id="tab-log" data-locked="true"
+              data-tooltip="Important events and run summaries. Unlocks at Level 3.">Log</button>
+      <button class="tab-btn" data-tab="settings" id="tab-settings" data-locked="false"
+              data-tooltip="Toggles, autosave rate, and UI preferences.">Settings</button>
+    </nav>
+
+    <main class="panels">
+      <section class="panel" id="panel-overview">
+        <h2>Overview</h2>
+        <div class="grid">
+          <div class="card">
+            <div class="card-title">Resources</div>
+            <div class="row">
+              <span>Qi</span>
+              <span id="qiValue">0</span>
+            </div>
+            <div class="row">
+              <span>Spirit Stones</span>
+              <span id="stonesValue">0</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Character</div>
+            <div class="row">
+              <span>Level</span>
+              <span id="charLevel">1</span>
+            </div>
+            <div class="row">
+              <span>Age</span>
+              <span id="ageValue">16</span>
+            </div>
+            <div class="row">
+              <span>Race</span>
+              <span id="raceValue">Human</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Actions</div>
+            <button id="meditateBtn" class="btn primary"
+                    data-tooltip="Focus to generate Qi and Meditation XP. Early core loop.">
+              Meditate
+            </button>
+            <button id="convertStoneBtn" class="btn" data-tooltip="Convert 1 Spirit Stone into 50 Qi.">
+              Use Spirit Stone → Qi
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel hidden" id="panel-skills">
+        <h2>Skills</h2>
+        <div id="skillsList" class="list"></div>
+      </section>
+
+      <section class="panel hidden" id="panel-traits">
+        <h2>Traits</h2>
+        <div id="traitsDraft" class="list"></div>
+        <button id="traitsRerollBtn" class="btn"
+                data-tooltip="Reroll the 9 offered traits (costs a small early resource in full design).">
+          Reroll Options
+        </button>
+        <button id="traitsConfirmBtn" class="btn primary"
+                data-tooltip="Confirm your 3 chosen traits for this life.">
+          Confirm Traits
+        </button>
+      </section>
+
+      <section class="panel hidden" id="panel-races">
+        <h2>Races</h2>
+        <div id="raceInfo" class="list"></div>
+      </section>
+
+      <section class="panel hidden" id="panel-log">
+        <h2>Log</h2>
+        <div id="logList" class="log"></div>
+      </section>
+
+      <section class="panel hidden" id="panel-settings">
+        <h2>Settings</h2>
+        <div class="list">
+          <label class="row">
+            <span>Autosave every (sec)</span>
+            <input id="autosaveSec" type="number" min="5" max="120" step="5" value="15">
+          </label>
+          <button id="hardResetBtn" class="btn danger"
+                  data-tooltip="Erase all progress and start a new life.">
+            Hard Reset
+          </button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="raceModal" class="modal hidden">
+    <div class="modal-card">
+      <h3>Choose Your Race</h3>
+      <div id="raceChoices" class="list"></div>
+      <div class="modal-actions">
+        <button id="raceConfirmBtn" class="btn primary">Confirm Race</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
