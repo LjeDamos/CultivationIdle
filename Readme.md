@@ -1,3 +1,5 @@
+# Alert - AI slop generated web app. Currently hollow prototype.
+
 # Lje-Cultivation-Idle – Design Document  
 
 ### High concept  
