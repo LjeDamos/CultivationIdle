@@ -1,0 +1,93 @@
+:root {
+    --bg-color: #121212;
+    --panel-bg: #1e1e1e;
+    --text-main: #e0e0e0;
+    --accent: #4caf50;
+    --accent-hover: #66bb6a;
+    --danger: #ef5350;
+    --border: #333;
+}
+
+body {
+    margin: 0;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Layout */
+#game-container {
+    display: grid;
+    grid-template-columns: 250px 1fr 300px;
+    height: 100%;
+}
+
+.panel {
+    background: var(--panel-bg);
+    border-right: 1px solid var(--border);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.right-panel { border-right: none; border-left: 1px solid var(--border); }
+.scrollable { overflow-y: auto; flex-grow: 1; }
+
+/* Typography & Elements */
+h1, h2, h3 { margin: 0.5rem 0; color: var(--accent); }
+.separator { height: 1px; background: var(--border); margin: 10px 0; }
+button {
+    background: #333; color: #fff; border: 1px solid #555; padding: 8px;
+    cursor: pointer; margin-top: 5px; transition: 0.2s;
+}
+button:hover:not(:disabled) { background: #444; border-color: var(--accent); }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Stats */
+.stat-row { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 4px; }
+
+/* Skills */
+.skill-card {
+    background: #252525; border: 1px solid #333; padding: 10px;
+    margin-bottom: 10px; border-radius: 4px;
+}
+.skill-header { display: flex; justify-content: space-between; align-items: center; }
+.progress-bar {
+    height: 6px; background: #111; margin-top: 5px; position: relative;
+}
+.progress-fill {
+    height: 100%; background: var(--accent); width: 0%; transition: width 0.2s linear;
+}
+
+/* Modal */
+.modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9); z-index: 100;
+    display: flex; justify-content: center; align-items: center;
+}
+.modal-content {
+    background: var(--panel-bg); padding: 2rem; border: 1px solid var(--accent);
+    width: 600px; max-width: 90%; max-height: 90vh; overflow-y: auto;
+}
+.selection-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 10px 0; }
+.select-opt {
+    padding: 10px; border: 1px solid #444; cursor: pointer; text-align: center;
+}
+.select-opt.selected { border-color: var(--accent); background: #2a3a2a; }
+.hidden { display: none !important; }
+
+/* Log */
+.log-container {
+    flex-grow: 1; overflow-y: auto; font-family: monospace; font-size: 0.85rem;
+}
+.log-entry { margin-bottom: 4px; border-bottom: 1px solid #222; padding-bottom: 2px; }
+.log-count { color: var(--accent); font-weight: bold; margin-right: 5px; }
+
+/* Tooltip */
+.tooltip {
+    position: absolute; background: #111; border: 1px solid #555;
+    padding: 10px; z-index: 1000; font-size: 0.85rem; pointer-events: none;
+    max-width: 250px; box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}

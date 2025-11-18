@@ -7,7 +7,7 @@
 Lje-Cultivation-Idle is an idle cultivation life-sim where a character grows from humble beginnings into a reality‑shaping immortal by mastering skills, optimizing loops, and reincarnating through sequential meta layers.
 Moment‑to‑moment play flows from clicking and micro‑optimization to automation, multi‑layer prestiges, and a late‑game grand objective that reframes prior systems at a near‑cosmic scale.
 The design is tuned from day one to avoid multi‑prestige fatigue, pacing stalls, and scope creep via explicit run‑time reduction targets, softcaps, and spreadsheet‑driven balancing.
-Discovery‑driven onboarding, progressive reveals, and measurable time‑to‑reset goals maintain momentum for both active and idle play across long sessions and offline windows.
+Player has a estimated lifespan, depending on attributes, race and skills. Also actions further in game can affect the lifespan.
 
 ### Pillars  
 
@@ -15,15 +15,6 @@ Skills define power and accelerate themselves so that actions both produce resou
 Multiple prestige layers with optional challenge modifiers create long‑term compounding gains and new run‑planning, inspired by Evolve‑style resets but constrained by pacing safeguards from idle design postmortems.
 A minimalist, readable interface with logs and compact surfaces optimizes idle clarity and reduces friction, following a text‑first philosophy similar to Progress Knight but extended with modern UX patterns and ETAs.
 Risk‑aware systems explicitly target known idle pitfalls such as over‑automation, snowballing economies, and overwhelming onboarding through staged unlocks and softcaps.
-
-### Design risks and mitigations  
-
-Each new prestige or meta layer must visibly cut repeat time to key milestones, targeting roughly a 30–50 percent faster path to the previous wall and surfacing expected gains per unit time in the UI.
-Pacing cliffs are avoided by defining explicit softcaps and breakpoints for all major growth paths, ensuring slopes flatten instead of producing hard walls while late‑game scarcity sinks stabilize inflation.
-Early over‑automation is prevented by staggering automation unlocks so that manual interaction yields bonuses and discoveries in early sessions, with managers and scripting arriving only in mid to late midgame.
-Balancing drift is controlled by centralizing costs and multipliers in auto‑calculating spreadsheets and parameter weight models used to keep new content consistent with previous layers.
-Onboarding complexity is managed through interactive teach‑by‑doing steps, checklists, and progress bars that branch on chosen race and traits instead of front‑loading static text walls.
-Scope creep is constrained by time‑boxed milestones, a vertical‑slice first approach, and telemetry‑driven iteration before expanding content breadth.
 
 ### Core loop  
 
@@ -35,44 +26,41 @@ The UI surfaces expected run‑time savings and marginal returns to help players
 
 ### Player creation  
 
-Each run starts by choosing a race, then picking three starting traits from nine randomized options drawn from an achievement‑expanded trait pool.
-A reroll option consumes a minor early resource so players can chase interesting synergies without falling into heavy analysis paralysis.
+Each run starts by choosing a race, then picking three starting traits from nine presented options drawn from an achievement‑expandable trait pool.
+Reroll option is available.
 Races alter attribute growth curves, early skill synergies, and available route hooks while avoiding hard locks on late‑game content, echoing Evolve‑style evolutionary paths.
-Onboarding branches by race, offering short race‑specific tasks that highlight unique strengths instead of relying solely on generic tutorials.
 
 ### Races  
 
-Human focuses on balanced attribute growth and flexible build paths, making it an ideal first‑clear and reference race.
-Elf emphasizes SPIRIT and AGI scaling, granting faster cultivation breakthroughs and more efficient meditation‑driven progress at the cost of physical robustness.
+Human focuses on balanced attribute growth and flexible build paths, making it an ideal first‑clear and reference race. 60 years basic lifespan.
+Elf emphasizes SPIRIT and AGI scaling, granting faster cultivation breakthroughs and more efficient meditation‑driven progress at the cost of physical robustness. 170 years basic lifespan.
 Demonkin leans into STR and VIT, rewarding aggressive challenge play and combat‑heavy routes with stronger physical output and survival.
-Spiritfolk specialize in Qi efficiency and meditation speed while starting with weaker physical stats, favoring players who enjoy optimization and non‑combat progress.
-Undying gain extended lifespans and death mitigation tools but suffer reduced early XP gains, inviting slower, long‑plan styles that exploit late‑life snowballing.
-Dragonkin require steep XP investment yet pay off with exponential late scaling, existing as a high skill‑ceiling race for players who master the meta layers.
+Spiritfolk specialize in Qi efficiency and meditation speed while starting with weaker physical stats, favoring players who enjoy optimization and non‑combat progress. 130 years basic lifespan.
+Undying gain extended lifespans and death mitigation tools but suffer reduced early XP gains, inviting slower, long‑plan styles that exploit late‑life snowballing. Unlimited lifespan, but huge penalty on exp gain.
+Dragonkin require steep XP investment yet pay off with exponential late scaling, existing as a high skill‑ceiling race for players who master the meta layers. 80 years estimated lifespan.
 
 ### Traits system  
 
 Each run, players pick three traits from nine options sampled from an expanding achievement‑gated pool, promoting variety and long‑term collection goals.
 Example traits include Quick Learner for global skill XP, Iron Body for damage reduction and VIT scaling, Qi Conduit for SPIRIT‑based production, Artisan for crafting output, and Strategist for formation and leadership efficiency.
 Traits have tiered upgrades unlocked via achievements and meta currencies, with diminishing returns at higher tiers to prevent any single trait from dominating all builds.
-One mid‑run respec token per life allows undoing dead‑end trait choices and is purchasable in Layer 2 meta, increasing long‑term flexibility without trivializing planning.
 
 ### Attributes  
 
-The core attributes are STR, VIT, AGI, SPIRIT, INT, and LUCK, each feeding specific skills and systems that define broad build archetypes.
+The core attributes are STR, VIT, AGI, SPI (spirit), INT, and LUC (luck), each feeding related skills and systems that define broad build archetypes.
 STR affects physical damage and carrying capacity, supporting martial and labor‑intensive activities.
 VIT governs health, regeneration, and lifespan buffers, deeply interacting with lifespan and challenge survivability.
 AGI controls action speed and dodge‑like multipliers, improving both combat responsiveness and throughput of time‑sensitive activities.
-SPIRIT drives cultivation rate, Qi regeneration, and magical scaling, synergizing with meditation, techniques, and spiritual breakthroughs.
+SPI drives cultivation rate, Qi regeneration, and magical scaling, synergizing with meditation, techniques, and spiritual breakthroughs.
 INT boosts research speed, knowledge caps, and formula‑driven bonuses, accelerating tech trees and mathematical optimizations.
-LUCK influences rare event frequency, high‑tier drop multipliers, and crit‑like effects, creating spike moments and supporting exploratory playstyles.
+LUCK influences rare event frequency, high‑tier drop multipliers, and crit‑like effects, creating spike moments and supporting exploratory playstyles. No normal way to upgrade.
 Attribute‑linked bonuses use smoothing curves and piecewise softcaps so that extreme stacking yields diminishing marginal returns rather than hard caps or runaway growth.
 
 ### Skills and activities  
 
-Every major activity maps to a skill, and performing that activity grants skill XP while the current skill level acts as a self‑multiplier on that activity’s effectiveness.
-Core skills include Meditation, Martial Arts, Alchemy, Crafting, Trading, Research, Exploration, Leadership, Formation, and Inscription, each supporting both idle and active variants where appropriate.
-Cross‑skill synergies discourage single‑skill tunneling; for example, Leadership and Formation can amplify Martial Arts and Exploration, while Research unlocks efficiencies for multiple skills.
-Key activities provide both idle modes and active bursts, allowing players to choose between relaxed passive play and short optimization sessions without mandatory clicking.
+Every activity maps to a skill, and performing that activity grants skill XP while the current skill level acts as a self‑multiplier on that activity’s effectiveness.
+When skills are used and upgraded - they affect attributes, but to a lesser extend.
+Core skills include Meditation, Body training, Alchemy, Crafting, Trading, Research, Exploration.
 
 ### Character level from skills  
 
@@ -85,7 +73,7 @@ The UI highlights marginal benefit of leveling breadth versus specialization so 
 ### Progression arc  
 
 Early game emphasizes clicking and short‑term goals such as bootstrapping Qi, basic resources, and initial skill levels.
-As players grow, they unlock batching, queues, and helpers or disciples, shifting focus toward managing schedules and efficiency thresholds.
+As player grow, they unlock batching, queues, and helpers or disciples, shifting focus toward managing schedules and efficiency thresholds.
 Midgame introduces job or skill managers and formation presets that keep systems running with minimal interaction while still rewarding occasional active adjustment.
 Late midgame and beyond unlock conditional scripting and seed‑aware automation that respond to thresholds, events, and challenges.
 Ascension layers and advanced meta systems transform long‑run planning, prompting players to target specific milestones before resetting for compounding gains.
@@ -137,7 +125,7 @@ Additional dailies and weeklies apply small modifiers and micro‑goals, increas
 
 ### Message log  
 
-A compact message log records notable events such as breakthroughs, rare drops, realm successes, and boss clears, stacking identical messages with a succinct count marker.
+A compact message log in right bottom corner records notable events such as breakthroughs, rare drops, realm successes, and boss clears, stacking identical messages with a succinct count marker.
 Filters and pins ensure that important lifecycle events such as lifespan thresholds, recommended reset prompts, and challenge completions remain visible in a minimalist interface.
 Periodic session recaps and offline summaries draw from the log to highlight progress and suggest next actions on return.
 
@@ -152,12 +140,6 @@ This finale repurposes earlier systems so that late‑game players engage with f
 Cultivation realms gate major multipliers, new techniques, and lifespan increases, requiring Qi, materials, and sometimes challenge clears to attempt breakthroughs.
 Attempts can include success odds and pity systems so that failure never triggers irreversible spirals, keeping progression pressure but avoiding frustration.
 Later realms integrate with world seeds so that chosen paths apply physics‑like modifiers to entire runs and influence which builds remain viable.
-
-### Techniques and formations  
-
-Techniques provide active skills and passive effects that consume Qi, allowing targeted bursts of power, defense, or efficiency tuned to specific situations.
-Formations enhance multi‑entity scaling by coordinating disciples, allies, or constructs to amplify stats and automate tactical choices.
-Preset formations teach thresholds and resource breakpoints, then gradually open into fully programmable templates that tie into the advanced automation layer.
 
 ### Combat and exploration  
 
@@ -192,23 +174,22 @@ On return, players see clear offline summaries including capped losses, complete
 
 The interface favors text‑first panels with expandable detail, sortable lists, and at‑a‑glance multipliers to keep information dense but readable.
 Contextual tooltips explain formulas, multiplier sources, and softcap behavior so that optimization play feels transparent rather than opaque.
-Onboarding teaches core interactions inside the game flow using scaffolded objectives, checklists, and milestone previews instead of long pre‑game tutorials.
-Goal visibility is maintained through progress bars and race or trait specific mini‑objectives that hint at deeper systems without overwhelming new players.
-
-### Monetization and retention (optional)  
-
-If monetization is added, it prioritizes fun and fairness, avoiding progress blocks and instead offering value‑forward bundles aligned with natural session breaks.
-Ads, if any, are opt‑in and tied to non‑critical boosts or cosmetics to preserve the integrity of long‑term progression.
-Retention levers include regular content updates, rotating events, social comparisons, and challenge ladders, all tuned using telemetry and A or B tests.
+Tooltip should fit in screen and be on top of all other elements.
 
 ### Technical notes  
 
-The game targets a performant HTML5 or JavaScript single‑page application with robust autosave, import or export, and resilience to tab suspensions.
+The game targets a performant HTML and JavaScript single‑page application with robust autosave, import or export, and resilience to tab suspensions.
 Core content such as races, traits, skills, realms, and seeds is defined via data‑driven configurations so that balancing and content expansion can occur without code changes.
 Analytics track metrics such as time‑to‑reset, session length, abandonment points, and feature adoption to support ongoing tuning and live‑ops decisions.
+<<<<<<< Updated upstream
 
 ### Roadmap  
 
 The vertical slice milestone focuses on core click loops, a small set of skills, a single breakthrough path, and basic reincarnation with Layer 1 meta and simple onboarding checklists.
 Midgame development introduces managers, expanded trait pools, early challenges, Layer 2 meta, and the first ascension with visible run‑time savings over previous runs.
 Late‑game and live‑ops work add Bloodlines, World Seeds, advanced formations and scripting, rotating events, and endgame celestial projects culminating in cosmos‑creation ascension.
+=======
+Game tick is 6 days per second. Adding it to player age, which is displayed as Age years Days days / Estimated lifespan.
+Game should be paused until player selects starting race.
+Game time passes always after player started the game.
+>>>>>>> Stashed changes
